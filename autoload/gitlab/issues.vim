@@ -6,6 +6,10 @@
 " Version: 0.1.0
 " Author : thinca <thinca+vim@gmail.com>
 " License: zlib License
+" 
+" Modified 
+" 2020.06.23 - bilbopingouin
+
 
 let s:save_cpo = &cpo
 set cpo&vim
@@ -136,7 +140,7 @@ function! s:Issues.add_comment(number, id, comment)
   if a:id ==# 'new'
     call add(self.get(a:number).comments, comment)
   else
-    call self.fetch_comment(a:number, 1)
+    call self.fetch_comments(a:number, 1)
   endif
 endfunction
 
@@ -144,7 +148,8 @@ function! s:Issues.fetch_comments(number, ...)
   let issue = self.get(a:number)
   let force = a:0 && a:1
   if force || !has_key(issue, 'comments') || type(issue.comments) == type(0)
-    let id = issue.id
+    " The API v4 seems to expect the ID instead of the IID
+    let id = a:number "issue.id
     let path = "/projects/:id/issues/" . id . "/notes"
     let issue.comments = self.connect('GET', path, {}, 0)
   endif
@@ -170,7 +175,6 @@ function! s:Issues.reopen(number)
 endfunction
 
 function! s:Issues.connect(method, url, data, is_pagelist)
-
   let token = self.get_token()
   let proj_id = gitlabapi#project_id(token, self.user, self.repos)
   if proj_id < 0
@@ -522,7 +526,6 @@ function! s:UI.read()
   let cursor = getpos('.')
   setlocal modifiable noreadonly
   let name = self.type . '_' . self.mode
-"echo "UI.read(): " . name
   silent % delete _
   silent 0put =self.header()
   silent $put =self[name]()

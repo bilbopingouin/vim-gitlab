@@ -6,6 +6,10 @@
 " Version: 0.1.0
 " Author : thinca <thinca+vim@gmail.com>
 " License: zlib License
+"
+" Modified 
+" 2020.06.23 - bilbopingouin
+
 
 let s:save_cpo = &cpo
 set cpo&vim
@@ -204,7 +208,7 @@ endfunction
 
 " pseudo buffer. {{{1
 function! gitlab#read(path)
-"echomsg "gitlab#read() path=" . a:path
+" echomsg "gitlab#read() path=" . a:path
   try
     let uri = gitlab#parse_path(a:path, 'gitlab://:site/:feature/::param')
     if !exists('b:gitlab')

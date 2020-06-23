@@ -1,3 +1,6 @@
+" Modified 
+" 2020.06.23 - bilbopingouin
+
 scriptencoding utf-8
 
 let s:save_cpo = &cpo
@@ -26,7 +29,7 @@ function! gitlabapi#session(url, id, email, password) " {{{
 endfunction " }}}
 
 function! gitlabapi#token(url, id, email, password) " {{{
-  let url = a:url . '/api/v3'
+  let url = a:url . '/api/v4'
   let ret = gitlabapi#session(url, a:id, a:email, a:password)
   if ret.success
     return {'url' : url, 'token' : ret.content.private_token}
