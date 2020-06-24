@@ -148,6 +148,9 @@ function! gitlab#get_text_on_cursor(pat)
   return ''
 endfunction
 
+" This function fails for larger stepped repos, like
+"     user/path1/path2 
+"
 " /path/*/to/*  => splat: [first, second]
 " /:feature/:user/:repos/#id
 "
@@ -178,6 +181,8 @@ function! gitlab#parse_path(path, pattern)
   if !empty(splat)
     let ret.splat = splat
   endif
+  "echom 'parse_path, path= '.a:path
+  "echom 'parse_path, name= '.ret[name]
   return ret
 endfunction
 

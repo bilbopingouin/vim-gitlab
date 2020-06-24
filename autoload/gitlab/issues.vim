@@ -542,7 +542,9 @@ function! s:UI.invoke(site, args)
     throw 'gitlab: issues: Require the repository name.'
   endif
   let repos = a:args[0]
-  let path = repos =~# '/' ? split(repos, '/')[0 : 1]
+      " in v4, a repository can have more elements in the path
+      " We still want to separate the namespace from the rest
+  let path = repos =~# '/' ? [split(repos, '/')[0], join(split(repos,'/')[1:-1],'/')]
   \                        : [g:gitlab_config[a:site].user, repos]
   if 2 <= len(a:args)
     call add(path, a:args[1])
