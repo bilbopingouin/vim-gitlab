@@ -6,7 +6,7 @@ vim-gitlab is a vim client for GitLab
 
 ## Install
 
-Use any bundle management as you want, for example, using [Plug](junegunn/vim-plug).
+Use any bundle management as you want, for example, using [Plug](https://github.com/junegunn/vim-plug).
 
 ```vim
 Plug 'bilbopingouin/vim-gitlab', {
@@ -58,7 +58,7 @@ So far, it is mostly the original work from synegan, and I haven't tested everyt
 
 ## License
 
-This is a fork from synegan's [vim-gitlab](synegan/vim-gitlab).
+This is a fork from synegan's [vim-gitlab](https://github.com/syngan/vim-gitlab).
 
 I kept the zlib license, but mentioned the files that I modified.
 
